@@ -1,4 +1,4 @@
-package me.guillaume.recruitment.tournament;
+package omarmelade.tournament;
 
 
 import org.junit.jupiter.api.Test;
