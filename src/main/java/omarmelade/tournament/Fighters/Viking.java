@@ -1,4 +1,7 @@
-package omarmelade.tournament;
+package omarmelade.tournament.Fighters;
+
+import omarmelade.tournament.Basics.Fighter;
+import omarmelade.tournament.Weapons.Axe;
 
 public class Viking extends Fighter {
 

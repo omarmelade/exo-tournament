@@ -1,4 +1,6 @@
-package omarmelade.tournament;
+package omarmelade.tournament.Basics;
+
+import omarmelade.tournament.Fight;
 
 abstract public class Fighter {
 

@@ -1,4 +1,4 @@
-package omarmelade.tournament;
+package omarmelade.tournament.Basics;
 
 abstract public class Weapon {
 

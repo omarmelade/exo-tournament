@@ -1,5 +1,7 @@
 package omarmelade.tournament;
 
+import omarmelade.tournament.Basics.Fighter;
+
 public class Fight {
 
     private Fighter f1, f2;

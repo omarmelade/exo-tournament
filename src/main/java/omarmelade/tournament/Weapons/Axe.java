@@ -1,4 +1,6 @@
-package omarmelade.tournament;
+package omarmelade.tournament.Weapons;
+
+import omarmelade.tournament.Basics.Weapon;
 
 public class Axe extends Weapon {
 

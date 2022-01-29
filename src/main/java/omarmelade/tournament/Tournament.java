@@ -1,5 +1,8 @@
 package omarmelade.tournament;
 
+import omarmelade.tournament.Fighters.Swordsman;
+import omarmelade.tournament.Fighters.Viking;
+
 public class Tournament {
 
     public static void main(String[] args) {
