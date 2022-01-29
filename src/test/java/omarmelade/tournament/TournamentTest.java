@@ -1,8 +1,6 @@
 package omarmelade.tournament;
 
 
-import omarmelade.tournament.Fighters.Swordsman;
-import omarmelade.tournament.Fighters.Viking;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
