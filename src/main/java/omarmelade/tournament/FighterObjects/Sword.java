@@ -1,4 +1,4 @@
-package omarmelade.tournament.Weapons;
+package omarmelade.tournament.FighterObjects;
 
 import omarmelade.tournament.Basics.Weapon;
 

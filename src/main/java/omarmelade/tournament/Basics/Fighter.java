@@ -2,22 +2,37 @@ package omarmelade.tournament.Basics;
 
 import omarmelade.tournament.Fight;
 
+import java.util.Objects;
+
 abstract public class Fighter {
 
     private int hitPoints;
-    private final Weapon rightH;
-    private final Weapon leftH;
+    private Weapon weapon;
+    private Defend def;
+    private Armor armor;
     private final String name;
 
     private Fight fight;
 
-    public Fighter(String name, int hitPoints, Weapon rightH) {
+    public Fighter(String name, int hitPoints,  Weapon w) {
         this.name = name;
         this.hitPoints = hitPoints;
-        this.rightH = rightH;
-        this.leftH = null;
+        this.weapon = w;
+        this.def = null;
     }
 
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public void setDef(Defend def) {
+        this.def = def;
+    }
 
     public void engage(Fighter f)
     {
@@ -30,9 +45,12 @@ abstract public class Fighter {
     }
 
     public void removeHitPoints(int dmg) {
+        if(dmg < 0)
+            dmg = 0;
         int removedPoints = hitPoints() - dmg;
         setHitPoints(Math.max(removedPoints, 0));
     }
+
 
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
@@ -42,11 +60,33 @@ abstract public class Fighter {
         return hitPoints() > 0;
     }
 
-    public void hit(Fighter f) {f.receiveHit(this.rightH.attack());}
+    public void hit(Fighter f) {
+        boolean armored = this.armor != null;
 
-    public void receiveHit(int dmg)
+        f.receiveHit(this.weapon, armored);
+    }
+
+    public void receiveHit(Weapon w, boolean armored)
     {
-        removeHitPoints(dmg);
+        int dmg = w.attack();
+
+        // armor is heavy
+        if (armored)
+            dmg -= 1;
+
+        if (this.armor != null)
+            dmg -= 3;
+
+        if( this.def == null ) {
+            removeHitPoints(dmg);
+        }else{
+
+            System.out.println(this.name + " Before Parry : " + dmg);
+            int parryRes = this.def.parryHit(w, dmg);
+            System.out.println(this.name + " Receive : " + parryRes);
+            removeHitPoints(parryRes);
+
+        }
     }
 
     @Override

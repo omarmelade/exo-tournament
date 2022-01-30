@@ -16,12 +16,14 @@ public class Fight {
         int round = 1;
         while(f1.alive() && f2.alive())
         {
-            System.out.println(f1.alive() + " " + f1.alive());
-            System.out.println("Round "+ round + "\n" + "    " + f1.toString() + "    "+ f2.toString());
+//            System.out.println(f1.alive() + " " + f1.alive());
+            System.out.println(" ------ Round "+ round + " ------ \n" + "    " + f1.toString() + "    "+ f2.toString()  );
 
             f1.hit(f2);
             f2.hit(f1);
             round++;
+
+            System.out.println("-------------------------------");
         }
         System.out.println(f1.alive() + " " + f1.alive());
         System.out.println("Round "+ round + "\n" + "    " + f1.toString() + "    "+ f2.toString());

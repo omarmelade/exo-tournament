@@ -1,7 +1,11 @@
 package omarmelade.tournament.Fighters;
 
+import omarmelade.tournament.Basics.Armor;
+import omarmelade.tournament.Basics.Defend;
 import omarmelade.tournament.Basics.Fighter;
-import omarmelade.tournament.Weapons.Sword;
+import omarmelade.tournament.FighterObjects.Sword;
+
+import java.util.Objects;
 
 public class Swordsman extends Fighter {
 
@@ -11,7 +15,11 @@ public class Swordsman extends Fighter {
     }
 
     @Override
-    public Swordsman equip(String buckler) {
-        return null;
+    public Swordsman equip(String weapon) {
+        if(Objects.equals(weapon, "buckler"))
+            this.setDef(new Defend("buckler", 3));
+        else
+            this.setArmor(new Armor("Armor", 3, 1));
+        return this;
     }
 }
