@@ -1,20 +1,26 @@
 package omarmelade.tournament.Basics;
 
 import omarmelade.tournament.Fight;
+import omarmelade.tournament.FighterObjects.Armor;
+import omarmelade.tournament.FighterObjects.Buckler;
 
 import java.util.Objects;
 
 abstract public class Fighter {
 
+    private int intialPV;
     private int hitPoints;
     private Weapon weapon;
-    private Defend def;
+    private Buckler def;
     private Armor armor;
     private final String name;
+    private String type;
+    private boolean typeActive = false;
 
     private Fight fight;
 
     public Fighter(String name, int hitPoints,  Weapon w) {
+        this.intialPV = hitPoints;
         this.name = name;
         this.hitPoints = hitPoints;
         this.weapon = w;
@@ -22,15 +28,35 @@ abstract public class Fighter {
     }
 
 
-    public Armor getArmor() {
-        return armor;
+    public Fighter(String name, int hitPoints) {
+        this.intialPV = hitPoints;
+        this.name = name;
+        this.hitPoints = hitPoints;
+        this.weapon = null;
+        this.def = null;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String attr) {
+        this.type = attr;
+    }
+
+    public Weapon getWeapon() {
+        return this.weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
 
-    public void setDef(Defend def) {
+    public void setDef(Buckler def) {
         this.def = def;
     }
 
@@ -48,6 +74,8 @@ abstract public class Fighter {
         if(dmg < 0)
             dmg = 0;
         int removedPoints = hitPoints() - dmg;
+
+
         setHitPoints(Math.max(removedPoints, 0));
     }
 
@@ -62,13 +90,22 @@ abstract public class Fighter {
 
     public void hit(Fighter f) {
         boolean armored = this.armor != null;
-
-        f.receiveHit(this.weapon, armored);
+        Blow b = new Blow(this.weapon, this);
+        f.receiveHit( this, this.weapon, armored);
     }
 
-    public void receiveHit(Weapon w, boolean armored)
+    public void receiveHit(Fighter f, Weapon w, boolean armored)
     {
         int dmg = w.attack();
+        if(Objects.equals(w.getEffect(), "poison") && w.getBlow() > 0)
+        {
+            dmg += 20;
+            w.setBlow(w.getBlow() - 1);
+        }
+
+        if(f.typeActive){
+            dmg -= 2;
+        }
 
         // armor is heavy
         if (armored)
@@ -80,13 +117,13 @@ abstract public class Fighter {
         if( this.def == null ) {
             removeHitPoints(dmg);
         }else{
-
             System.out.println(this.name + " Before Parry : " + dmg);
             int parryRes = this.def.parryHit(w, dmg);
             System.out.println(this.name + " Receive : " + parryRes);
             removeHitPoints(parryRes);
-
         }
+
+
     }
 
     @Override
@@ -95,4 +132,9 @@ abstract public class Fighter {
     }
 
     public abstract Fighter equip(String buckler);
+
+    public Buckler getDef()
+    {
+        return this.def;
+    }
 }

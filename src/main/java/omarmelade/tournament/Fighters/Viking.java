@@ -1,6 +1,6 @@
 package omarmelade.tournament.Fighters;
 
-import omarmelade.tournament.Basics.Defend;
+import omarmelade.tournament.FighterObjects.Buckler;
 import omarmelade.tournament.Basics.Fighter;
 import omarmelade.tournament.FighterObjects.Axe;
 
@@ -12,7 +12,7 @@ public class Viking extends Fighter {
 
     @Override
     public Viking equip(String buckler) {
-        this.setDef(new Defend("buckler", 3));
+        this.setDef(new Buckler("buckler", 3));
 
         return this;
     }

@@ -11,6 +11,10 @@ public class Highlander extends Fighter {
         super("Highlander", 150, new GreatSword());
     }
 
+    public Highlander(String type) {
+        super("Highlander", 150, new GreatSword());
+        this.setType(type);
+    }
     @Override
     public Fighter equip(String buckler) {
         return this;

@@ -1,47 +1,45 @@
-package omarmelade.tournament.Basics;
+package omarmelade.tournament.FighterObjects;
+
+import omarmelade.tournament.Basics.Weapon;
 
 import java.util.Objects;
 
-public class Defend {
+public class Buckler {
 
     private int durability;
     private final String name;
     private boolean blockLastHit;
 
 
-    public Defend(String name, int durability) {
+    public Buckler(String name, int durability) {
         this.durability = durability;
         this.name = name;
     }
 
-    public int parryHit( Weapon w, int dmg )
+    public int parryHit(Weapon w, int dmg )
     {
         int hitPointToRemove = 0;
 
-        System.out.println();
+        if(this.getDurability() == 0)
+            return dmg;
 
-        if (!this.isBlockLastHit() && this.getDurability() > 0) {
+        if (!this.isBlockLastHit()) {
 
             this.setBlockLastHit(true);
 
-            if(Objects.equals(w.getName(), "Axe")){
+            if(w instanceof Axe){
                 this.setDurability(this.getDurability() - 1);
             }
-            System.out.println("parade");
 
             if(w.getCooldown() == 0){
                 this.setBlockLastHit(false);
-                System.out.println("parade 2");
             }
         }
-
-        else if ( this.isBlockLastHit() || this.getDurability() == 0)
+        else if ( this.isBlockLastHit() )
         {
             this.setBlockLastHit(false);
             hitPointToRemove = dmg;
         }
-
-
 
         return hitPointToRemove;
     }

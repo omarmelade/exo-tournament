@@ -1,4 +1,4 @@
-package omarmelade.tournament.Basics;
+package omarmelade.tournament.FighterObjects;
 
 public class Armor {
 
